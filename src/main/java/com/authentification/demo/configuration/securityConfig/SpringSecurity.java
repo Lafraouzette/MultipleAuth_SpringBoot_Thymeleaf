@@ -1,4 +1,4 @@
-package com.authentification.demo.securityConfig;
+package com.authentification.demo.configuration.securityConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

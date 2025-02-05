@@ -1,4 +1,4 @@
-package com.authentification.demo.securityConfig;
+package com.authentification.demo.configuration.securityConfig;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
