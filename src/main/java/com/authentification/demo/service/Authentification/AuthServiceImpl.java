@@ -3,7 +3,10 @@ package com.authentification.demo.service.Authentification;
 import com.authentification.demo.dto.UserDto;
 import com.authentification.demo.entity.Role;
 import com.authentification.demo.entity.User;
+import com.authentification.demo.exceptions.EmailAlreadyUsedException;
 import com.authentification.demo.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,18 +25,26 @@ public class AuthServiceImpl implements AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional
     @Override
-    public void saveUser(UserDto userDto) {
+    public User saveUser(UserDto userDto) {
+        // Vérifier si l'email existe déjà
+        if (userRepository.findByEmail(userDto.getEmail()) != null) {
+            throw new EmailAlreadyUsedException("L'email est déjà utilisé.");
+        }
+
         User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
-        // Encrypt the password using Spring Security
+
+        // Encodage du mot de passe
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        user.setRole(Role.USER); // Utilisation de l'Enum Role
+        // Attribution d'un rôle par défaut
+        user.setRole(Role.USER);
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override

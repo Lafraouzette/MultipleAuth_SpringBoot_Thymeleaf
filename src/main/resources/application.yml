@@ -2,7 +2,11 @@ server:
   port: 8081
   error:
     include-message: always
-
+  servlet:
+      session:
+        timeout: 1800s  # 30 minutes
+        persistent: true  # Sessions persistantes
+        tracking-modes: COOKIE
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -14,3 +18,5 @@ spring:
       ddl-auto: update
     show-sql: true
     open-in-view: true
+
+  

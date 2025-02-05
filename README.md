@@ -5,7 +5,7 @@
 - Authentification et Autorisation
 - Utilisation de fragments de composants dans le frontend
 - API REST simple pour la gestion des utilisateurs par un administrateur
-
+- Gérer les sessions : configurer la durée de la session, limiter le nombre de sessions simultanées . . . ; Tous cela dans le fichier app.yml + SecurityConfig 
 ## Outils Utilisés
 - Java 17
 - Spring Boot 3.4.2
